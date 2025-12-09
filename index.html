@@ -14,6 +14,22 @@
     gtag('config', 'AW-17787743085');
   </script>
 
+  <!-- Event snippet for Clique de saída conversion page -->
+  <script>
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17787743085/-BY5CIX4t84bEO3W7aFC',
+        'event_callback': callback
+    });
+    return false;
+  }
+  </script>
+
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -114,6 +130,7 @@
       href="https://wa.me/5534999999999?text=Quero%20saber%20mais%20sobre%20o%20pen%20drive"
       target="_blank"
       rel="noopener noreferrer"
+      onclick="return gtag_report_conversion('https://wa.me/5534999999999?text=Quero%20saber%20mais%20sobre%20o%20pen%20drive');"
     >
       Falar com atendimento no WhatsApp
     </a>
