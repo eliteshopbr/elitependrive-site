@@ -5,6 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Elite Pen Drive | Página Oficial</title>
 
+  <!-- Meta Pixel Code -->
+  <script>
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = "https://connect.facebook.net/en_US/fbevents.js";
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, "script");
+
+    fbq("init", "4556623184564045");
+    fbq("track", "PageView");
+  </script>
+  <noscript>
+    <img
+      height="1"
+      width="1"
+      style="display: none"
+      src="https://www.facebook.com/tr?id=4556623184564045&ev=PageView&noscript=1"
+      alt=""
+    />
+  </noscript>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17787743085"></script>
   <script>
@@ -76,6 +108,9 @@ function gtag_report_conversion(url) {
       margin: 22px 0;
       border: 1px solid rgba(255,255,255,0.06);
     }
+    .card p {
+      font-size: 1rem;
+    }
     .list {
       text-align: left;
       font-size: 0.95rem;
@@ -86,21 +121,40 @@ function gtag_report_conversion(url) {
     .list li {
       margin-bottom: 6px;
     }
-    .cta {
-      display: block;
-      width: 100%;
+    .cta-group {
+      display: grid;
+      gap: 12px;
       margin-top: 20px;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
       padding: 14px 18px;
-      border-radius: 999px;
+      border-radius: 14px;
       border: none;
       background: #f6c33b;
       color: #1b1206;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1rem;
       text-decoration: none;
+      box-shadow: 0 12px 30px rgba(246, 195, 59, 0.2);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+    .cta span {
+      display: block;
+      text-align: left;
+    }
+    .cta small {
+      display: block;
+      font-weight: 500;
+      opacity: 0.8;
+      font-size: 0.85rem;
     }
     .cta:active {
       transform: scale(0.98);
+      box-shadow: 0 8px 18px rgba(246, 195, 59, 0.18);
     }
     .note {
       margin-top: 12px;
@@ -125,16 +179,35 @@ function gtag_report_conversion(url) {
       </ul>
     </div>
 
-    <!-- BOTÃO RASTREADO -->
-    <a
-      class="cta"
-      href="https://wa.me/5534999999999?text=Quero%20saber%20mais%20sobre%20o%20pen%20drive"
-      target="_blank"
-      rel="noopener noreferrer"
-      onclick="return gtag_report_conversion('https://wa.me/5534999999999?text=Quero%20saber%20mais%20sobre%20o%20pen%20drive');"
-    >
-      Falar com atendimento no WhatsApp
-    </a>
+    <!-- BOTÕES RASTREADOS -->
+    <div class="cta-group">
+      <a
+        class="cta"
+        href="https://wa.me/5564993213670?text=Quero%20saber%20mais%20sobre%20o%20pen%20drive%20em%20Itumbiara"
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="return gtag_report_conversion('https://wa.me/5564993213670?text=Quero%20saber%20mais%20sobre%20o%20pen%20drive%20em%20Itumbiara');"
+      >
+        <span>
+          Itumbiara<br />
+          <small>Atendimento local via WhatsApp</small>
+        </span>
+        ➤
+      </a>
+      <a
+        class="cta"
+        href="https://wa.me/5534984431567?text=Quero%20saber%20mais%20sobre%20o%20pen%20drive%20em%20Uberl%C3%A2ndia"
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="return gtag_report_conversion('https://wa.me/5534984431567?text=Quero%20saber%20mais%20sobre%20o%20pen%20drive%20em%20Uberl%C3%A2ndia');"
+      >
+        <span>
+          Uberlândia<br />
+          <small>Fale direto com nossa equipe</small>
+        </span>
+        ➤
+      </a>
+    </div>
 
     <p class="note">
       Atendimento exclusivo via WhatsApp. Responderemos o mais rápido possível em horário comercial.
@@ -142,4 +215,3 @@ function gtag_report_conversion(url) {
   </main>
 </body>
 </html>
-
