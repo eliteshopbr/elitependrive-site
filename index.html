@@ -46,26 +46,25 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-17787743085');
+    gtag("js", new Date());
+    gtag("config", "AW-17787743085");
   </script>
 
- <!-- Event snippet for Clique de saída conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-<script>
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
+  <!-- Event snippet for Clique de saída conversion page -->
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof url !== "undefined") {
+          window.location = url;
+        }
+      };
+      gtag("event", "conversion", {
+        send_to: "AW-17787743085/-BY5CIX4t84bEO3W7aFC",
+        event_callback: callback
+      });
+      return false;
     }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17787743085/-BY5CIX4t84bEO3W7aFC',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
+  </script>
 
   <style>
     :root {
@@ -77,9 +76,7 @@ function gtag_report_conversion(url) {
       --muted: #cfd2dc;
       --primary: #f7f8fb;
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       background: radial-gradient(circle at 20% 20%, rgba(246, 195, 59, 0.06), transparent 35%),
@@ -146,10 +143,7 @@ function gtag_report_conversion(url) {
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
     }
-    .stack {
-      display: grid;
-      gap: 14px;
-    }
+    .stack { display: grid; gap: 14px; }
     .list {
       text-align: left;
       font-size: 0.98rem;
@@ -158,9 +152,7 @@ function gtag_report_conversion(url) {
       padding-left: 18px;
       line-height: 1.55;
     }
-    .list li + li {
-      margin-top: 6px;
-    }
+    .list li + li { margin-top: 6px; }
     .cta-group {
       display: grid;
       gap: 12px;
@@ -237,14 +229,9 @@ function gtag_report_conversion(url) {
       font-size: 0.95rem;
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .grid-2 {
-      display: grid;
-      gap: 12px;
-    }
+    .grid-2 { display: grid; gap: 12px; }
     @media (min-width: 768px) {
-      .grid-2 {
-        grid-template-columns: 1fr 1fr;
-      }
+      .grid-2 { grid-template-columns: 1fr 1fr; }
     }
     .trust-badges {
       display: grid;
@@ -275,6 +262,7 @@ function gtag_report_conversion(url) {
     }
   </style>
 </head>
+
 <body>
   <main class="page">
     <header>
@@ -282,6 +270,7 @@ function gtag_report_conversion(url) {
       <div class="hero-tag">Descartáveis gelados • Pronta entrega</div>
       <h1>Descartáveis gelados prontos para uso em Uberlândia</h1>
       <p class="sub">Entrega rápida, pagamento na entrega e suporte direto pelo WhatsApp.</p>
+
       <div class="cta-group">
         <a
           class="cta"
@@ -303,6 +292,7 @@ function gtag_report_conversion(url) {
           </span>
         </a>
       </div>
+
       <p class="note">Atendimento oficial em Uberlândia. Consulte estoque atualizado pelo WhatsApp.</p>
     </header>
 
@@ -346,6 +336,7 @@ function gtag_report_conversion(url) {
         <li>Confirmamos estoque e horário de entrega na região de Uberlândia.</li>
         <li>Você recebe, confere e paga na entrega. Simples e seguro.</li>
       </ul>
+
       <div class="cta-group">
         <a
           class="cta"
@@ -395,6 +386,7 @@ function gtag_report_conversion(url) {
           <p>Usamos embalagem discreta, enviamos prova de autenticidade antes e mantemos um único número oficial para evitar golpes.</p>
         </div>
       </div>
+
       <div class="cta-group">
         <a
           class="cta"
@@ -418,5 +410,141 @@ function gtag_report_conversion(url) {
       </div>
     </section>
   </main>
+
+  <!-- =========================
+       SENHA + SHEETS + WHATSAPP
+       ========================= -->
+  <script>
+    (function () {
+      const PHONE = "5534984431567";
+      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzymha-UArqr9Bz9VoWNrB_r4HVAjGYKZNSlC4HBOT2Pwo1N6XF95_H6Xh0FcMXFC5Q/exec";
+
+      // 1) Persistir parâmetros ao carregar a página (pra não perder)
+      (function persistParams() {
+        const keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid"];
+        const qs = new URLSearchParams(window.location.search);
+        keys.forEach(k => {
+          const v = qs.get(k);
+          if (v) localStorage.setItem(k, v);
+        });
+      })();
+
+      function buildPayload() {
+        return {
+          gclid: localStorage.getItem("gclid") || "",
+          gbraid: localStorage.getItem("gbraid") || "",
+          wbraid: localStorage.getItem("wbraid") || "",
+          utm_source: localStorage.getItem("utm_source") || "",
+          utm_medium: localStorage.getItem("utm_medium") || "",
+          utm_campaign: localStorage.getItem("utm_campaign") || "",
+          utm_content: localStorage.getItem("utm_content") || "",
+          utm_term: localStorage.getItem("utm_term") || "",
+          page: window.location.href,
+          referrer: document.referrer || "",
+          user_agent: navigator.userAgent || ""
+        };
+      }
+
+      // 2) Tentar via fetch (se CORS permitir)
+      async function getSenhaViaFetch(payload) {
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data || typeof data.senha === "undefined" || data.senha === null) {
+          throw new Error("Resposta sem senha");
+        }
+        return String(data.senha);
+      }
+
+      // 3) Fallback via JSONP (se CORS bloquear) — exige doGet() no Apps Script
+      function getSenhaViaJSONP(payload) {
+        return new Promise((resolve, reject) => {
+          const cbName = "__senha_cb_" + Math.random().toString(36).slice(2);
+          const timeout = setTimeout(() => {
+            cleanup();
+            reject(new Error("JSONP timeout"));
+          }, 8000);
+
+          function cleanup() {
+            clearTimeout(timeout);
+            try { delete window[cbName]; } catch (e) {}
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+          }
+
+          window[cbName] = function (data) {
+            cleanup();
+            if (!data || typeof data.senha === "undefined" || data.senha === null) {
+              reject(new Error("JSONP sem senha"));
+              return;
+            }
+            resolve(String(data.senha));
+          };
+
+          const qs = new URLSearchParams();
+          qs.set("callback", cbName);
+          qs.set("payload", JSON.stringify(payload));
+
+          const script = document.createElement("script");
+          script.src = APPS_SCRIPT_URL + "?" + qs.toString();
+          script.onerror = function () {
+            cleanup();
+            reject(new Error("JSONP error"));
+          };
+          document.head.appendChild(script);
+        });
+      }
+
+      function buildWhatsUrl(senha) {
+        const msg = `[Senha ${senha}] Vim do Google, gostaria do catálogo.`;
+        return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+      }
+
+      function buildWhatsUrlFallback() {
+        const msg = `Vim do Google, gostaria do catálogo.`;
+        return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+      }
+
+      async function handleWhatsAppClick(e) {
+        const a = e.target.closest(`a[href*="wa.me/${PHONE}"]`);
+        if (!a) return;
+
+        // impedir o onclick inline e o comportamento padrão
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+
+        const payload = buildPayload();
+
+        let senha = null;
+        try {
+          // tenta fetch primeiro
+          senha = await getSenhaViaFetch(payload);
+        } catch (errFetch) {
+          // tenta JSONP (se você adicionar o doGet no Apps Script)
+          try {
+            senha = await getSenhaViaJSONP(payload);
+          } catch (errJsonp) {
+            senha = null;
+          }
+        }
+
+        const finalUrl = senha ? buildWhatsUrl(senha) : buildWhatsUrlFallback();
+
+        // dispara conversão e redireciona pelo callback do Google
+        try {
+          gtag_report_conversion(finalUrl);
+        } catch (e2) {
+          // fallback se gtag falhar por algum motivo
+          window.location.href = finalUrl;
+        }
+      }
+
+      // captura cliques em qualquer um dos 3 botões
+      document.addEventListener("click", handleWhatsAppClick, true);
+    })();
+  </script>
 </body>
 </html>
