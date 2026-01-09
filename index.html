@@ -412,139 +412,256 @@
   </main>
 
   <!-- =========================
-       SENHA + SHEETS + WHATSAPP
-       ========================= -->
-  <script>
-    (function () {
-      const PHONE = "5534984431567";
-      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzymha-UArqr9Bz9VoWNrB_r4HVAjGYKZNSlC4HBOT2Pwo1N6XF95_H6Xh0FcMXFC5Q/exec";
+     SENHA + SHEETS + WHATSAPP
+     (com overlay "Abrindo WhatsApp..." e anti-duplo-clique)
+     ========================= -->
+<script>
+  (function () {
+    const PHONE = "5534984431567";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzymha-UArqr9Bz9VoWNrB_r4HVAjGYKZNSlC4HBOT2Pwo1N6XF95_H6Xh0FcMXFC5Q/exec";
 
-      // 1) Persistir parâmetros ao carregar a página (pra não perder)
-      (function persistParams() {
-        const keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid"];
-        const qs = new URLSearchParams(window.location.search);
-        keys.forEach(k => {
-          const v = qs.get(k);
-          if (v) localStorage.setItem(k, v);
-        });
-      })();
-
-      function buildPayload() {
-        return {
-          gclid: localStorage.getItem("gclid") || "",
-          gbraid: localStorage.getItem("gbraid") || "",
-          wbraid: localStorage.getItem("wbraid") || "",
-          utm_source: localStorage.getItem("utm_source") || "",
-          utm_medium: localStorage.getItem("utm_medium") || "",
-          utm_campaign: localStorage.getItem("utm_campaign") || "",
-          utm_content: localStorage.getItem("utm_content") || "",
-          utm_term: localStorage.getItem("utm_term") || "",
-          page: window.location.href,
-          referrer: document.referrer || "",
-          user_agent: navigator.userAgent || ""
-        };
-      }
-
-      // 2) Tentar via fetch (se CORS permitir)
-      async function getSenhaViaFetch(payload) {
-        const res = await fetch(APPS_SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (!data || typeof data.senha === "undefined" || data.senha === null) {
-          throw new Error("Resposta sem senha");
-        }
-        return String(data.senha);
-      }
-
-      // 3) Fallback via JSONP (se CORS bloquear) — exige doGet() no Apps Script
-      function getSenhaViaJSONP(payload) {
-        return new Promise((resolve, reject) => {
-          const cbName = "__senha_cb_" + Math.random().toString(36).slice(2);
-          const timeout = setTimeout(() => {
-            cleanup();
-            reject(new Error("JSONP timeout"));
-          }, 8000);
-
-          function cleanup() {
-            clearTimeout(timeout);
-            try { delete window[cbName]; } catch (e) {}
-            if (script && script.parentNode) script.parentNode.removeChild(script);
-          }
-
-          window[cbName] = function (data) {
-            cleanup();
-            if (!data || typeof data.senha === "undefined" || data.senha === null) {
-              reject(new Error("JSONP sem senha"));
-              return;
-            }
-            resolve(String(data.senha));
-          };
-
-          const qs = new URLSearchParams();
-          qs.set("callback", cbName);
-          qs.set("payload", JSON.stringify(payload));
-
-          const script = document.createElement("script");
-          script.src = APPS_SCRIPT_URL + "?" + qs.toString();
-          script.onerror = function () {
-            cleanup();
-            reject(new Error("JSONP error"));
-          };
-          document.head.appendChild(script);
-        });
-      }
-
-      function buildWhatsUrl(senha) {
-        const msg = `[Senha ${senha}] Vim do Google, gostaria do catálogo.`;
-        return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
-      }
-
-      function buildWhatsUrlFallback() {
-        const msg = `Vim do Google, gostaria do catálogo.`;
-        return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
-      }
-
-      async function handleWhatsAppClick(e) {
-        const a = e.target.closest(`a[href*="wa.me/${PHONE}"]`);
-        if (!a) return;
-
-        // impedir o onclick inline e o comportamento padrão
-        e.preventDefault();
-        e.stopPropagation();
-        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-
-        const payload = buildPayload();
-
-        let senha = null;
-        try {
-          // tenta fetch primeiro
-          senha = await getSenhaViaFetch(payload);
-        } catch (errFetch) {
-          // tenta JSONP (se você adicionar o doGet no Apps Script)
-          try {
-            senha = await getSenhaViaJSONP(payload);
-          } catch (errJsonp) {
-            senha = null;
-          }
-        }
-
-        const finalUrl = senha ? buildWhatsUrl(senha) : buildWhatsUrlFallback();
-
-        // dispara conversão e redireciona pelo callback do Google
-        try {
-          gtag_report_conversion(finalUrl);
-        } catch (e2) {
-          // fallback se gtag falhar por algum motivo
-          window.location.href = finalUrl;
-        }
-      }
-
-      // captura cliques em qualquer um dos 3 botões
-      document.addEventListener("click", handleWhatsAppClick, true);
+    // 1) Persistir parâmetros ao carregar a página (pra não perder)
+    (function persistParams() {
+      const keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid"];
+      const qs = new URLSearchParams(window.location.search);
+      keys.forEach(k => {
+        const v = qs.get(k);
+        if (v) localStorage.setItem(k, v);
+      });
     })();
-  </script>
+
+    function buildPayload() {
+      return {
+        gclid: localStorage.getItem("gclid") || "",
+        gbraid: localStorage.getItem("gbraid") || "",
+        wbraid: localStorage.getItem("wbraid") || "",
+        utm_source: localStorage.getItem("utm_source") || "",
+        utm_medium: localStorage.getItem("utm_medium") || "",
+        utm_campaign: localStorage.getItem("utm_campaign") || "",
+        utm_content: localStorage.getItem("utm_content") || "",
+        utm_term: localStorage.getItem("utm_term") || "",
+        page: window.location.href,
+        referrer: document.referrer || "",
+        user_agent: navigator.userAgent || ""
+      };
+    }
+
+    // 2) Tentar via fetch (se CORS permitir)
+    async function getSenhaViaFetch(payload) {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!data || typeof data.senha === "undefined" || data.senha === null) {
+        throw new Error("Resposta sem senha");
+      }
+      return String(data.senha);
+    }
+
+    // 3) Fallback via JSONP (se CORS bloquear)
+    function getSenhaViaJSONP(payload) {
+      return new Promise((resolve, reject) => {
+        const cbName = "__senha_cb_" + Math.random().toString(36).slice(2);
+        let script = null;
+
+        const timeout = setTimeout(() => {
+          cleanup();
+          reject(new Error("JSONP timeout"));
+        }, 8000);
+
+        function cleanup() {
+          clearTimeout(timeout);
+          try { delete window[cbName]; } catch (e) {}
+          if (script && script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        window[cbName] = function (data) {
+          cleanup();
+          if (!data || typeof data.senha === "undefined" || data.senha === null) {
+            reject(new Error("JSONP sem senha"));
+            return;
+          }
+          resolve(String(data.senha));
+        };
+
+        const qs = new URLSearchParams();
+        qs.set("callback", cbName);
+        qs.set("payload", JSON.stringify(payload));
+
+        script = document.createElement("script");
+        script.src = APPS_SCRIPT_URL + "?" + qs.toString();
+        script.onerror = function () {
+          cleanup();
+          reject(new Error("JSONP error"));
+        };
+        document.head.appendChild(script);
+      });
+    }
+
+    function buildWhatsUrl(senha) {
+      const msg = `[Senha ${senha}] Vim do Google, gostaria do catálogo.`;
+      return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function buildWhatsUrlFallback() {
+      const msg = `Vim do Google, gostaria do catálogo.`;
+      return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+    }
+
+    // ===== UX: overlay + travar duplo clique =====
+    let __waOpening = false;
+
+    function ensureOverlay() {
+      let el = document.getElementById("wa-opening-overlay");
+      if (el) return el;
+
+      const style = document.createElement("style");
+      style.id = "wa-opening-style";
+      style.textContent = `
+        #wa-opening-overlay{
+          position:fixed; inset:0; z-index:999999;
+          display:none; align-items:center; justify-content:center;
+          background:rgba(5,6,10,.72);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+        }
+        #wa-opening-overlay .box{
+          width:min(92vw, 420px);
+          background:rgba(15,17,25,.96);
+          border:1px solid rgba(255,255,255,.08);
+          border-radius:16px;
+          padding:18px 16px;
+          box-shadow: 0 24px 60px rgba(0,0,0,.45);
+          text-align:center;
+          color:#f7f8fb;
+        }
+        #wa-opening-overlay .title{ font-weight:800; font-size:1.05rem; margin:0 0 6px; }
+        #wa-opening-overlay .sub{ color:rgba(207,210,220,.95); margin:0; font-size:.95rem; }
+        #wa-opening-overlay .spinner{
+          width:34px; height:34px; margin:0 auto 12px;
+          border-radius:50%;
+          border:3px solid rgba(246,195,59,.25);
+          border-top-color: rgba(246,195,59,1);
+          animation: waSpin 900ms linear infinite;
+        }
+        @keyframes waSpin { to { transform: rotate(360deg); } }
+      `;
+      document.head.appendChild(style);
+
+      el = document.createElement("div");
+      el.id = "wa-opening-overlay";
+      el.innerHTML = `
+        <div class="box" role="status" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <p class="title">Abrindo WhatsApp…</p>
+          <p class="sub">Aguarde só um instante para carregar seu atendimento.</p>
+        </div>
+      `;
+      document.body.appendChild(el);
+      return el;
+    }
+
+    function beforeUnloadWhileOpening(e) {
+      if (!__waOpening) return;
+      e.preventDefault();
+      e.returnValue = "";
+      return "";
+    }
+
+    function setOpeningUI(on, anchorEl) {
+      const overlay = ensureOverlay();
+
+      if (on) {
+        overlay.style.display = "flex";
+        document.documentElement.style.cursor = "wait";
+        __waOpening = true;
+
+        window.addEventListener("beforeunload", beforeUnloadWhileOpening);
+
+        // trava todos os CTAs (evita múltiplas senhas)
+        document.querySelectorAll(`a[href*="wa.me/${PHONE}"]`).forEach(a => {
+          a.style.pointerEvents = "none";
+        });
+
+        // ajusta texto do CTA clicado (sem mexer no layout)
+        if (anchorEl) {
+          anchorEl.dataset.waOriginalHtml = anchorEl.innerHTML;
+          const txt = anchorEl.querySelector(".cta-text");
+          if (txt) {
+            txt.innerHTML = `Abrindo WhatsApp…<br /><small>Não feche esta página</small>`;
+          }
+        }
+      } else {
+        overlay.style.display = "none";
+        document.documentElement.style.cursor = "";
+        __waOpening = false;
+
+        window.removeEventListener("beforeunload", beforeUnloadWhileOpening);
+
+        document.querySelectorAll(`a[href*="wa.me/${PHONE}"]`).forEach(a => {
+          a.style.pointerEvents = "";
+          if (a.dataset.waOriginalHtml) {
+            a.innerHTML = a.dataset.waOriginalHtml;
+            delete a.dataset.waOriginalHtml;
+          }
+        });
+      }
+    }
+
+    async function handleWhatsAppClick(e) {
+      const a = e.target.closest(`a[href*="wa.me/${PHONE}"]`);
+      if (!a) return;
+
+      // se já está abrindo, ignora
+      if (__waOpening) {
+        e.preventDefault();
+        return;
+      }
+
+      // impedir o onclick inline e o comportamento padrão
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+
+      setOpeningUI(true, a);
+
+      const payload = buildPayload();
+
+      let senha = null;
+      try {
+        senha = await getSenhaViaFetch(payload);
+      } catch (errFetch) {
+        try {
+          senha = await getSenhaViaJSONP(payload);
+        } catch (errJsonp) {
+          senha = null;
+        }
+      }
+
+      const finalUrl = senha ? buildWhatsUrl(senha) : buildWhatsUrlFallback();
+
+      // watchdog: se o callback do Google não rodar, abre mesmo assim
+      const watchdog = setTimeout(() => {
+        window.location.href = finalUrl;
+      }, 2200);
+
+      try {
+        // usa o seu snippet do Google Ads (mantém tracking)
+        gtag_report_conversion(finalUrl);
+      } catch (e2) {
+        clearTimeout(watchdog);
+        window.location.href = finalUrl;
+      }
+
+      // não desfaz UI porque vai navegar para o WhatsApp
+    }
+
+    // captura cliques em qualquer um dos 3 botões
+    document.addEventListener("click", handleWhatsAppClick, true);
+  })();
+</script>
 </body>
 </html>
+
