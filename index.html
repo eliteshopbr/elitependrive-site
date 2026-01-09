@@ -563,12 +563,6 @@
       return el;
     }
 
-    function beforeUnloadWhileOpening(e) {
-      if (!__waOpening) return;
-      e.preventDefault();
-      e.returnValue = "";
-      return "";
-    }
 
     function setOpeningUI(on, anchorEl) {
       const overlay = ensureOverlay();
@@ -578,7 +572,6 @@
         document.documentElement.style.cursor = "wait";
         __waOpening = true;
 
-        window.addEventListener("beforeunload", beforeUnloadWhileOpening);
 
         // trava todos os CTAs (evita múltiplas senhas)
         document.querySelectorAll(`a[href*="wa.me/${PHONE}"]`).forEach(a => {
@@ -598,7 +591,6 @@
         document.documentElement.style.cursor = "";
         __waOpening = false;
 
-        window.removeEventListener("beforeunload", beforeUnloadWhileOpening);
 
         document.querySelectorAll(`a[href*="wa.me/${PHONE}"]`).forEach(a => {
           a.style.pointerEvents = "";
@@ -664,4 +656,5 @@
 </script>
 </body>
 </html>
+
 
