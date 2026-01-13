@@ -46,25 +46,26 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "AW-17787743085");
+    gtag('js', new Date());
+    gtag('config', 'AW-17787743085');
   </script>
 
-  <!-- Event snippet for Clique de saída conversion page -->
-  <script>
-    function gtag_report_conversion(url) {
-      var callback = function () {
-        if (typeof url !== "undefined") {
-          window.location = url;
-        }
-      };
-      gtag("event", "conversion", {
-        send_to: "AW-17787743085/-BY5CIX4t84bEO3W7aFC",
-        event_callback: callback
-      });
-      return false;
+ <!-- Event snippet for Clique de saída conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
     }
-  </script>
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-17787743085/-BY5CIX4t84bEO3W7aFC',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
 
   <style>
     :root {
@@ -76,7 +77,9 @@
       --muted: #cfd2dc;
       --primary: #f7f8fb;
     }
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       background: radial-gradient(circle at 20% 20%, rgba(246, 195, 59, 0.06), transparent 35%),
@@ -143,7 +146,10 @@
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
     }
-    .stack { display: grid; gap: 14px; }
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
     .list {
       text-align: left;
       font-size: 0.98rem;
@@ -152,7 +158,9 @@
       padding-left: 18px;
       line-height: 1.55;
     }
-    .list li + li { margin-top: 6px; }
+    .list li + li {
+      margin-top: 6px;
+    }
     .cta-group {
       display: grid;
       gap: 12px;
@@ -229,9 +237,14 @@
       font-size: 0.95rem;
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .grid-2 { display: grid; gap: 12px; }
+    .grid-2 {
+      display: grid;
+      gap: 12px;
+    }
     @media (min-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
     }
     .trust-badges {
       display: grid;
@@ -262,22 +275,33 @@
     }
   </style>
 </head>
-
 <body>
+  <script>
+    (function (window, document, script) {
+      if (!window.tt) {
+        window.tt = window.tt || {};
+        c = document.getElementsByTagName("head")[0];
+        k = document.createElement("script");
+        k.async = 1;
+        k.src = script;
+        c.appendChild(k);
+      }
+      window.tt.accountCode = "3e385327-710e-4c37-9284-ecfc6be49cd5";
+    })(window, document, "//s.tintim.app/static/core/tintim-1.0.js");
+  </script>
   <main class="page">
     <header>
       <div class="logo">ELITE DESCARTÁVEIS</div>
       <div class="hero-tag">Descartáveis gelados • Pronta entrega</div>
       <h1>Descartáveis gelados prontos para uso em Uberlândia</h1>
       <p class="sub">Entrega rápida, pagamento na entrega e suporte direto pelo WhatsApp.</p>
-
       <div class="cta-group">
         <a
           class="cta"
-          href="https://wa.me/5534984431567?text=Vim%20do%20Google,%20gostaria%20do%20cat%C3%A1logo."
+          href="https://tintim.link/whatsapp/3e385327-710e-4c37-9284-ecfc6be49cd5/5783c455-4d37-4cef-bb3e-273ae695ef91"
           target="_blank"
           rel="noopener noreferrer"
-          onclick="return gtag_report_conversion('https://wa.me/5534984431567?text=Vim%20do%20Google,%20gostaria%20do%20cat%C3%A1logo.');"
+          onclick="return gtag_report_conversion('https://tintim.link/whatsapp/3e385327-710e-4c37-9284-ecfc6be49cd5/5783c455-4d37-4cef-bb3e-273ae695ef91');"
         >
           <span class="cta-icon" aria-hidden="true">
             <svg viewBox="0 0 32 32" role="img" focusable="false">
@@ -292,7 +316,6 @@
           </span>
         </a>
       </div>
-
       <p class="note">Atendimento oficial em Uberlândia. Consulte estoque atualizado pelo WhatsApp.</p>
     </header>
 
@@ -336,14 +359,13 @@
         <li>Confirmamos estoque e horário de entrega na região de Uberlândia.</li>
         <li>Você recebe, confere e paga na entrega. Simples e seguro.</li>
       </ul>
-
       <div class="cta-group">
         <a
           class="cta"
-          href="https://wa.me/5534984431567?text=Vim%20do%20Google,%20gostaria%20do%20cat%C3%A1logo."
+          href="https://tintim.link/whatsapp/3e385327-710e-4c37-9284-ecfc6be49cd5/5783c455-4d37-4cef-bb3e-273ae695ef91"
           target="_blank"
           rel="noopener noreferrer"
-          onclick="return gtag_report_conversion('https://wa.me/5534984431567?text=Vim%20do%20Google,%20gostaria%20do%20cat%C3%A1logo.');"
+          onclick="return gtag_report_conversion('https://tintim.link/whatsapp/3e385327-710e-4c37-9284-ecfc6be49cd5/5783c455-4d37-4cef-bb3e-273ae695ef91');"
         >
           <span class="cta-icon" aria-hidden="true">
             <svg viewBox="0 0 32 32" role="img" focusable="false">
@@ -386,14 +408,13 @@
           <p>Usamos embalagem discreta, enviamos prova de autenticidade antes e mantemos um único número oficial para evitar golpes.</p>
         </div>
       </div>
-
       <div class="cta-group">
         <a
           class="cta"
-          href="https://wa.me/5534984431567?text=Vim%20do%20Google,%20gostaria%20do%20cat%C3%A1logo."
+          href="https://tintim.link/whatsapp/3e385327-710e-4c37-9284-ecfc6be49cd5/5783c455-4d37-4cef-bb3e-273ae695ef91"
           target="_blank"
           rel="noopener noreferrer"
-          onclick="return gtag_report_conversion('https://wa.me/5534984431567?text=Vim%20do%20Google,%20gostaria%20do%20cat%C3%A1logo.');"
+          onclick="return gtag_report_conversion('https://tintim.link/whatsapp/3e385327-710e-4c37-9284-ecfc6be49cd5/5783c455-4d37-4cef-bb3e-273ae695ef91');"
         >
           <span class="cta-icon" aria-hidden="true">
             <svg viewBox="0 0 32 32" role="img" focusable="false">
@@ -410,252 +431,14 @@
       </div>
     </section>
   </main>
-
-  <!-- =========================
-     SENHA + SHEETS + WHATSAPP
-     (com overlay "Abrindo WhatsApp..." e anti-duplo-clique)
-     ========================= -->
-<script>
-  (function () {
-    const PHONE = "5534984431567";
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyY_8-eXjLkt6BVUVaOaT1RWATm1Pq3hMrwbaCm9Cc0c14Zmi3Pp1CUMpxKN37NVuT7jQ/exec";
-
-    // 1) Persistir parâmetros ao carregar a página (pra não perder)
-    (function persistParams() {
-      const keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid"];
-      const qs = new URLSearchParams(window.location.search);
-      keys.forEach(k => {
-        const v = qs.get(k);
-        if (v) localStorage.setItem(k, v);
-      });
-    })();
-
-    function buildPayload() {
-      return {
-        gclid: localStorage.getItem("gclid") || "",
-        gbraid: localStorage.getItem("gbraid") || "",
-        wbraid: localStorage.getItem("wbraid") || "",
-        utm_source: localStorage.getItem("utm_source") || "",
-        utm_medium: localStorage.getItem("utm_medium") || "",
-        utm_campaign: localStorage.getItem("utm_campaign") || "",
-        utm_content: localStorage.getItem("utm_content") || "",
-        utm_term: localStorage.getItem("utm_term") || "",
-        page: window.location.href,
-        referrer: document.referrer || "",
-        user_agent: navigator.userAgent || ""
-      };
-    }
-
-    // 2) Tentar via fetch (se CORS permitir)
-    async function getSenhaViaFetch(payload) {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      if (!data || typeof data.senha === "undefined" || data.senha === null) {
-        throw new Error("Resposta sem senha");
-      }
-      return String(data.senha);
-    }
-
-    // 3) Fallback via JSONP (se CORS bloquear)
-    function getSenhaViaJSONP(payload) {
-      return new Promise((resolve, reject) => {
-        const cbName = "__senha_cb_" + Math.random().toString(36).slice(2);
-        let script = null;
-
-        const timeout = setTimeout(() => {
-          cleanup();
-          reject(new Error("JSONP timeout"));
-        }, 8000);
-
-        function cleanup() {
-          clearTimeout(timeout);
-          try { delete window[cbName]; } catch (e) {}
-          if (script && script.parentNode) script.parentNode.removeChild(script);
-        }
-
-        window[cbName] = function (data) {
-          cleanup();
-          if (!data || typeof data.senha === "undefined" || data.senha === null) {
-            reject(new Error("JSONP sem senha"));
-            return;
-          }
-          resolve(String(data.senha));
-        };
-
-        const qs = new URLSearchParams();
-        qs.set("callback", cbName);
-        qs.set("payload", JSON.stringify(payload));
-
-        script = document.createElement("script");
-        script.src = APPS_SCRIPT_URL + "?" + qs.toString();
-        script.onerror = function () {
-          cleanup();
-          reject(new Error("JSONP error"));
-        };
-        document.head.appendChild(script);
-      });
-    }
-
-    function buildWhatsUrl(senha) {
-      const msg = `[Senha ${senha}] Vim do Google, gostaria do catálogo.`;
-      return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
-    }
-
-    function buildWhatsUrlFallback() {
-      const msg = `Vim do Google, gostaria do catálogo.`;
-      return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
-    }
-
-    // ===== UX: overlay + travar duplo clique =====
-    let __waOpening = false;
-
-    function ensureOverlay() {
-      let el = document.getElementById("wa-opening-overlay");
-      if (el) return el;
-
-      const style = document.createElement("style");
-      style.id = "wa-opening-style";
-      style.textContent = `
-        #wa-opening-overlay{
-          position:fixed; inset:0; z-index:999999;
-          display:none; align-items:center; justify-content:center;
-          background:rgba(5,6,10,.72);
-          backdrop-filter: blur(6px);
-          -webkit-backdrop-filter: blur(6px);
-        }
-        #wa-opening-overlay .box{
-          width:min(92vw, 420px);
-          background:rgba(15,17,25,.96);
-          border:1px solid rgba(255,255,255,.08);
-          border-radius:16px;
-          padding:18px 16px;
-          box-shadow: 0 24px 60px rgba(0,0,0,.45);
-          text-align:center;
-          color:#f7f8fb;
-        }
-        #wa-opening-overlay .title{ font-weight:800; font-size:1.05rem; margin:0 0 6px; }
-        #wa-opening-overlay .sub{ color:rgba(207,210,220,.95); margin:0; font-size:.95rem; }
-        #wa-opening-overlay .spinner{
-          width:34px; height:34px; margin:0 auto 12px;
-          border-radius:50%;
-          border:3px solid rgba(246,195,59,.25);
-          border-top-color: rgba(246,195,59,1);
-          animation: waSpin 900ms linear infinite;
-        }
-        @keyframes waSpin { to { transform: rotate(360deg); } }
-      `;
-      document.head.appendChild(style);
-
-      el = document.createElement("div");
-      el.id = "wa-opening-overlay";
-      el.innerHTML = `
-        <div class="box" role="status" aria-live="polite">
-          <div class="spinner" aria-hidden="true"></div>
-          <p class="title">Abrindo WhatsApp…</p>
-          <p class="sub">Aguarde só um instante para carregar seu atendimento.</p>
-        </div>
-      `;
-      document.body.appendChild(el);
-      return el;
-    }
-
-
-    function setOpeningUI(on, anchorEl) {
-      const overlay = ensureOverlay();
-
-      if (on) {
-        overlay.style.display = "flex";
-        document.documentElement.style.cursor = "wait";
-        __waOpening = true;
-
-
-        // trava todos os CTAs (evita múltiplas senhas)
-        document.querySelectorAll(`a[href*="wa.me/${PHONE}"]`).forEach(a => {
-          a.style.pointerEvents = "none";
-        });
-
-        // ajusta texto do CTA clicado (sem mexer no layout)
-        if (anchorEl) {
-          anchorEl.dataset.waOriginalHtml = anchorEl.innerHTML;
-          const txt = anchorEl.querySelector(".cta-text");
-          if (txt) {
-            txt.innerHTML = `Abrindo WhatsApp…<br /><small>Não feche esta página</small>`;
-          }
-        }
-      } else {
-        overlay.style.display = "none";
-        document.documentElement.style.cursor = "";
-        __waOpening = false;
-
-
-        document.querySelectorAll(`a[href*="wa.me/${PHONE}"]`).forEach(a => {
-          a.style.pointerEvents = "";
-          if (a.dataset.waOriginalHtml) {
-            a.innerHTML = a.dataset.waOriginalHtml;
-            delete a.dataset.waOriginalHtml;
-          }
-        });
-      }
-    }
-
-    async function handleWhatsAppClick(e) {
-      const a = e.target.closest(`a[href*="wa.me/${PHONE}"]`);
-      if (!a) return;
-
-      // se já está abrindo, ignora
-      if (__waOpening) {
-        e.preventDefault();
-        return;
-      }
-
-      // impedir o onclick inline e o comportamento padrão
-      e.preventDefault();
-      e.stopPropagation();
-      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-
-      setOpeningUI(true, a);
-
-      const payload = buildPayload();
-
-      let senha = null;
-      try {
-        senha = await getSenhaViaFetch(payload);
-      } catch (errFetch) {
-        try {
-          senha = await getSenhaViaJSONP(payload);
-        } catch (errJsonp) {
-          senha = null;
-        }
-      }
-
-      const finalUrl = senha ? buildWhatsUrl(senha) : buildWhatsUrlFallback();
-
-      // watchdog: se o callback do Google não rodar, abre mesmo assim
-      const watchdog = setTimeout(() => {
-        window.location.href = finalUrl;
-      }, 2200);
-
-      try {
-        // usa o seu snippet do Google Ads (mantém tracking)
-        gtag_report_conversion(finalUrl);
-      } catch (e2) {
-        clearTimeout(watchdog);
-        window.location.href = finalUrl;
-      }
-
-      // não desfaz UI porque vai navegar para o WhatsApp
-    }
-
-    // captura cliques em qualquer um dos 3 botões
-    document.addEventListener("click", handleWhatsAppClick, true);
-  })();
-</script>
+  <a
+    href="https://tintim.link/whatsapp/3e385327-710e-4c37-9284-ecfc6be49cd5/5783c455-4d37-4cef-bb3e-273ae695ef91"
+    target="_blank"
+    style="position: fixed; z-index: 9999; right: 20px; bottom: 20px; width: 64px; height: 64px; display: flex; justify-content: center; align-items: center; background: #00AD57; border-radius: 100%;"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF" width="32" height="32">
+      <path d="M7.25361 18.4944L7.97834 18.917C9.18909 19.623 10.5651 20 12.001 20C16.4193 20 20.001 16.4183 20.001 12C20.001 7.58172 16.4193 4 12.001 4C7.5827 4 4.00098 7.58172 4.00098 12C4.00098 13.4363 4.37821 14.8128 5.08466 16.0238L5.50704 16.7478L4.85355 19.1494L7.25361 18.4944ZM2.00516 22L3.35712 17.0315C2.49494 15.5536 2.00098 13.8345 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22C10.1671 22 8.44851 21.5064 6.97086 20.6447L2.00516 22ZM8.39232 7.30833C8.5262 7.29892 8.66053 7.29748 8.79459 7.30402C8.84875 7.30758 8.90265 7.31384 8.95659 7.32007C9.11585 7.33846 9.29098 7.43545 9.34986 7.56894C9.64818 8.24536 9.93764 8.92565 10.2182 9.60963C10.2801 9.76062 10.2428 9.95633 10.125 10.1457C10.0652 10.2428 9.97128 10.379 9.86248 10.5183C9.74939 10.663 9.50599 10.9291 9.50599 10.9291C9.50599 10.9291 9.40738 11.0473 9.44455 11.1944C9.45903 11.25 9.50521 11.331 9.54708 11.3991C9.57027 11.4368 9.5918 11.4705 9.60577 11.4938C9.86169 11.9211 10.2057 12.3543 10.6259 12.7616C10.7463 12.8783 10.8631 12.9974 10.9887 13.108C11.457 13.5209 11.9868 13.8583 12.559 14.1082L12.5641 14.1105C12.6486 14.1469 12.692 14.1668 12.8157 14.2193C12.8781 14.2457 12.9419 14.2685 13.0074 14.2858C13.0311 14.292 13.0554 14.2955 13.0798 14.2972C13.2415 14.3069 13.335 14.2032 13.3749 14.1555C14.0984 13.279 14.1646 13.2218 14.1696 13.2222V13.2238C14.2647 13.1236 14.4142 13.0888 14.5476 13.097C14.6085 13.1007 14.6691 13.1124 14.7245 13.1377C15.2563 13.3803 16.1258 13.7587 16.1258 13.7587L16.7073 14.0201C16.8047 14.0671 16.8936 14.1778 16.8979 14.2854C16.9005 14.3523 16.9077 14.4603 16.8838 14.6579C16.8525 14.9166 16.7738 15.2281 16.6956 15.3913C16.6406 15.5058 16.5694 15.6074 16.4866 15.6934C16.3743 15.81 16.2909 15.8808 16.1559 15.9814C16.0737 16.0426 16.0311 16.0714 16.0311 16.0714C15.8922 16.159 15.8139 16.2028 15.6484 16.2909C15.391 16.428 15.1066 16.5068 14.8153 16.5218C14.6296 16.5313 14.4444 16.5447 14.2589 16.5347C14.2507 16.5342 13.6907 16.4482 13.6907 16.4482C12.2688 16.0742 10.9538 15.3736 9.85034 14.402C9.62473 14.2034 9.4155 13.9885 9.20194 13.7759C8.31288 12.8908 7.63982 11.9364 7.23169 11.0336C7.03043 10.5884 6.90299 10.1116 6.90098 9.62098C6.89729 9.01405 7.09599 8.4232 7.46569 7.94186C7.53857 7.84697 7.60774 7.74855 7.72709 7.63586C7.85348 7.51651 7.93392 7.45244 8.02057 7.40811C8.13607 7.34902 8.26293 7.31742 8.39232 7.30833Z"></path>
+    </svg>
+  </a>
 </body>
 </html>
-
-
-
