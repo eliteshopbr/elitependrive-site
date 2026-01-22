@@ -286,7 +286,263 @@
   </style>
 </head>
 <body>
-
+<!-- Clara Tracking Script DINÂMICO - Kihon Hair -->
+<!-- Este script gera um código ÚNICO para cada visitante -->
+<!-- Config ID: 987d9192-b9fc-4a9f-bccb-7de95ab0d677 -->
+<script>
+(function() {
+    'use strict';
+    
+    const CLARA_CONFIG = {
+        configId: '9600f76f-1fb0-4ef9-a936-6780fe7d1932',  // ID da configuração (padrão)
+        companyId: 'fce5fec7-8fc3-4335-b7ae-536bc48b194b',
+        apiUrl: 'https://api.reativazap.com/tracking',  // ⚠️ TROCAR pela URL do seu backend em produção!
+        debug: true  // Ativado para debug - mude para false em produção
+    };
+    
+    const CLARA_TRACKING = {
+        trackingCode: null,      // Será preenchido dinamicamente
+        displayText: null,       // Será preenchido dinamicamente
+        codeGenerated: false,
+        
+        // 🎯 GERAR CÓDIGO ÚNICO para este visitante
+        generateCode: async function() {
+            try {
+                if (CLARA_CONFIG.debug) {
+                    console.log('🎲 Gerando código único...');
+                    console.log('📋 Config ID:', CLARA_CONFIG.configId);
+                }
+                
+                const response = await fetch(CLARA_CONFIG.apiUrl + '/generate-code/' + CLARA_CONFIG.configId);
+                
+                if (!response.ok) {
+                    throw new Error('Erro ao gerar código: ' + response.status);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    this.trackingCode = result.tracking_code;
+                    this.displayText = result.display_text;
+                    this.codeGenerated = true;
+                    
+                    if (CLARA_CONFIG.debug) {
+                        console.log('✅ Código gerado:', this.trackingCode);
+                        console.log('💬 Mensagem completa:', this.displayText);
+                    }
+                    
+                    return true;
+                } else {
+                    console.error('❌ Erro ao gerar código:', result);
+                    return false;
+                }
+            } catch (error) {
+                console.error('❌ Erro na geração de código:', error);
+                return false;
+            }
+        },
+        
+        // Detectar UTMs e parâmetros da URL
+        getTrackingParams: function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                utm_source: urlParams.get('utm_source'),
+                utm_medium: urlParams.get('utm_medium'),
+                utm_campaign: urlParams.get('utm_campaign'),
+                utm_content: urlParams.get('utm_content'),
+                utm_term: urlParams.get('utm_term'),
+                gclid: urlParams.get('gclid'),
+                fbclid: urlParams.get('fbclid')
+            };
+        },
+        
+        // Registrar clique no backend
+        registerClick: async function(trackingParams, trackingCode) {
+            try {
+                const payload = {
+                    company_id: CLARA_CONFIG.companyId,
+                    tracking_code: trackingCode,
+                    utm_source: trackingParams.utm_source,
+                    utm_medium: trackingParams.utm_medium,
+                    utm_campaign: trackingParams.utm_campaign,
+                    utm_content: trackingParams.utm_content,
+                    utm_term: trackingParams.utm_term,
+                    gclid: trackingParams.gclid,
+                    fbclid: trackingParams.fbclid,
+                    user_agent: navigator.userAgent,
+                    landing_page_url: window.location.href,
+                    referrer_url: document.referrer,
+                    click_timestamp: new Date().toISOString()
+                };
+                
+                if (CLARA_CONFIG.debug) {
+                    console.log('📤 Enviando clique para API:', payload);
+                }
+                
+                const response = await fetch(CLARA_CONFIG.apiUrl + '/register-click', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success || response.ok) {
+                    if (CLARA_CONFIG.debug) console.log('✅ Clique registrado:', result);
+                    return true;
+                } else {
+                    console.error('❌ Erro ao registrar clique:', result);
+                    return false;
+                }
+            } catch (error) {
+                console.error('❌ Erro na requisição de clique:', error);
+                return false;
+            }
+        },
+        
+        // Modificar TODOS os links WhatsApp da página
+        modifyWhatsAppLinks: function() {
+            if (!this.codeGenerated) {
+                console.warn('⚠️ Código ainda não foi gerado, aguardando...');
+                return 0;
+            }
+            
+            // Usar mensagem completa gerada dinamicamente
+            const fullMessage = this.displayText || this.trackingCode;
+            
+            // Selecionar todos os links do WhatsApp
+            const selectors = [
+                'a[href*="wa.me"]',
+                'a[href*="api.whatsapp.com"]',
+                'a[href*="whatsapp.com"]'
+            ];
+            
+            const whatsappLinks = document.querySelectorAll(selectors.join(', '));
+            
+            if (CLARA_CONFIG.debug) {
+                console.log(🔍 Encontrados ${whatsappLinks.length} links do WhatsApp);
+            }
+            
+            const trackingParams = this.getTrackingParams();
+            
+            whatsappLinks.forEach((link, index) => {
+                const originalHref = link.href;
+                
+                try {
+                    const url = new URL(originalHref);
+                    
+                    // Usar mensagem completa (código gerado + frase)
+                    url.searchParams.set('text', fullMessage);
+                    link.href = url.toString();
+                    
+                    // Adicionar evento de clique
+                    link.addEventListener('click', async (e) => {
+                        if (CLARA_CONFIG.debug) console.log('🖱️ Clique no link WhatsApp #' + index);
+                        
+                        // Registrar clique no backend
+                        await this.registerClick(trackingParams, this.trackingCode);
+                    });
+                    
+                    if (CLARA_CONFIG.debug) {
+                        console.log(✅ Link #${index} modificado:, {
+                            original: originalHref,
+                            novo: link.href,
+                            mensagemCompleta: fullMessage
+                        });
+                    }
+                } catch (error) {
+                    console.error(❌ Erro ao modificar link #${index}:, error);
+                }
+            });
+            
+            return whatsappLinks.length;
+        },
+        
+        // Observar novos links adicionados dinamicamente
+        observeNewLinks: function() {
+            const observer = new MutationObserver((mutations) => {
+                let hasNewLinks = false;
+                
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            const selectors = [
+                                'a[href*="wa.me"]',
+                                'a[href*="api.whatsapp.com"]',
+                                'a[href*="whatsapp.com"]'
+                            ];
+                            
+                            const newLinks = node.querySelectorAll ? 
+                                node.querySelectorAll(selectors.join(', ')) : [];
+                            
+                            if (newLinks.length > 0) {
+                                hasNewLinks = true;
+                            }
+                        }
+                    });
+                });
+                
+                if (hasNewLinks) {
+                    if (CLARA_CONFIG.debug) console.log('🔄 Novos links detectados, atualizando...');
+                    this.modifyWhatsAppLinks();
+                }
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
+            if (CLARA_CONFIG.debug) console.log('👀 Observer ativo para novos links');
+        },
+        
+        // Inicializar tracking
+        init: async function() {
+            if (CLARA_CONFIG.debug) {
+                console.log('🚀 Clara Tracking DINÂMICO iniciando...');
+                console.log('📋 Configuração:', {
+                    configId: CLARA_CONFIG.configId,
+                    empresa: CLARA_CONFIG.companyId,
+                    url: window.location.href
+                });
+            }
+            
+            // 1. Gerar código único para este visitante
+            const codeGenerated = await this.generateCode();
+            
+            if (!codeGenerated) {
+                console.error('❌ Falha ao gerar código, tracking desativado');
+                return;
+            }
+            
+            // 2. Modificar links existentes
+            const linksModified = this.modifyWhatsAppLinks();
+            
+            // 3. Observar novos links
+            this.observeNewLinks();
+            
+            if (CLARA_CONFIG.debug) {
+                console.log(✅ Clara Tracking ativado! ${linksModified} links modificados.);
+                console.log(🎯 Código único gerado: ${this.trackingCode});
+            }
+        }
+    };
+    
+    // Inicializar quando DOM estiver pronto
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => CLARA_TRACKING.init());
+    } else {
+        CLARA_TRACKING.init();
+    }
+    
+    // Expor para debug (opcional)
+    window.CLARA_TRACKING = CLARA_TRACKING;
+})();
+</script>
+  
   <!-- 🔧 Script para PROPAGAR gclid/wbraid/gbraid + utms para TODOS os links tintim.link (sem mexer no botão flutuante/pixel) -->
   <script>
     (function () {
@@ -521,3 +777,4 @@
 
 </body>
 </html>
+
