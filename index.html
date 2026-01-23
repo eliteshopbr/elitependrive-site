@@ -37,7 +37,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17787743085"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-17787743085');
   </script>
@@ -52,7 +52,9 @@
       --muted: #cfd2dc;
       --primary: #f7f8fb;
     }
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       background: radial-gradient(circle at 20% 20%, rgba(246, 195, 59, 0.06), transparent 35%),
@@ -69,7 +71,11 @@
       flex-direction: column;
       gap: 18px;
     }
-    header { text-align: center; display: grid; gap: 12px; }
+    header {
+      text-align: center;
+      display: grid;
+      gap: 12px;
+    }
     .logo {
       font-weight: 800;
       font-size: 0.95rem;
@@ -78,9 +84,20 @@
       color: var(--primary);
       opacity: 0.9;
     }
-    h1 { font-size: clamp(2.05rem, 6vw, 2.8rem); margin: 0; line-height: 1.1; }
-    h2 { margin: 0 0 8px; font-size: 1.3rem; }
-    p { margin: 0 0 6px; font-size: 1rem; color: var(--muted); }
+    h1 {
+      font-size: clamp(2.05rem, 6vw, 2.8rem);
+      margin: 0;
+      line-height: 1.1;
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 1.3rem;
+    }
+    p {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: var(--muted);
+    }
     .hero-tag {
       display: inline-flex;
       align-items: center;
@@ -93,7 +110,10 @@
       margin: 0 auto;
       font-weight: 700;
     }
-    .sub { font-size: 1.05rem; color: #e9ebf2; }
+    .sub {
+      font-size: 1.05rem;
+      color: #e9ebf2;
+    }
     .card {
       background: var(--card);
       border-radius: 18px;
@@ -101,7 +121,10 @@
       border: 1px solid rgba(255, 255, 255, 0.06);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
     }
-    .stack { display: grid; gap: 14px; }
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
     .list {
       text-align: left;
       font-size: 0.98rem;
@@ -110,8 +133,14 @@
       padding-left: 18px;
       line-height: 1.55;
     }
-    .list li + li { margin-top: 6px; }
-    .cta-group { display: grid; gap: 12px; margin-top: 14px; }
+    .list li + li {
+      margin-top: 6px;
+    }
+    .cta-group {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
     .cta {
       display: inline-flex;
       align-items: center;
@@ -139,8 +168,16 @@
       flex-shrink: 0;
       box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.18);
     }
-    .cta svg { width: 22px; height: 22px; fill: #0b2a14; }
-    .cta .cta-text { display: block; text-align: left; line-height: 1.35; }
+    .cta svg {
+      width: 22px;
+      height: 22px;
+      fill: #0b2a14;
+    }
+    .cta .cta-text {
+      display: block;
+      text-align: left;
+      line-height: 1.35;
+    }
     .cta small {
       display: block;
       font-weight: 600;
@@ -152,8 +189,20 @@
       transform: translateY(1px) scale(0.99);
       box-shadow: 0 8px 18px rgba(37, 211, 102, 0.2);
     }
-    .note { margin-top: 8px; font-size: 0.85rem; color: var(--muted); text-align: center; }
-    .pill-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .note {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
     .pill-list li {
       background: rgba(255, 255, 255, 0.06);
       color: #f5f5f5;
@@ -163,8 +212,15 @@
       font-size: 0.95rem;
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .grid-2 { display: grid; gap: 12px; }
-    @media (min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .grid-2 {
+      display: grid;
+      gap: 12px;
+    }
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
     .trust-badges {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -188,12 +244,15 @@
       margin-bottom: 8px;
       color: #f7f0d2;
     }
-    .section-title span { color: var(--accent); font-size: 1.3rem; }
+    .section-title span {
+      color: var(--accent);
+      font-size: 1.3rem;
+    }
   </style>
 </head>
-
 <body>
-  <!-- Meta Pixel noscript (deve ficar no body) -->
+
+  <!-- Meta Pixel noscript -->
   <noscript>
     <img
       height="1"
@@ -214,14 +273,14 @@
     const CLARA_CONFIG = {
       configId: 'f1583f3c-b191-4107-9fb7-822614c707bb',
       companyId: 'fce5fec7-8fc3-4335-b7ae-536bc48b194b',
-      apiUrl: 'https://api.reativazap.com/tracking',
+      apiUrl: 'https://api.reativazap.com/tracking', // /generate-code e /register-click
       debug: false
     };
 
-    // Disparo de saída (Google Ads + Meta)
+    // Conversão de saída (clique no WhatsApp)
     const EXIT_CONFIG = {
       googleSendTo: 'AW-17787743085/-BY5CIX4t84bEO3W7aFC',
-      metaEventName: 'Lead' // pode trocar para 'Contact' se preferir
+      metaEventName: 'Lead'
     };
 
     const CLARA_TRACKING = {
@@ -231,19 +290,36 @@
 
       generateCode: async function() {
         try {
+          if (CLARA_CONFIG.debug) {
+            console.log('🎲 Gerando código único...');
+            console.log('📋 Config ID:', CLARA_CONFIG.configId);
+          }
+
           const response = await fetch(CLARA_CONFIG.apiUrl + '/generate-code/' + CLARA_CONFIG.configId);
-          if (!response.ok) throw new Error('Erro ao gerar código: ' + response.status);
+
+          if (!response.ok) {
+            throw new Error('Erro ao gerar código: ' + response.status);
+          }
 
           const result = await response.json();
+
           if (result && result.success) {
             this.trackingCode = result.tracking_code;
             this.displayText = result.display_text;
             this.codeGenerated = true;
+
+            if (CLARA_CONFIG.debug) {
+              console.log('✅ Código gerado:', this.trackingCode);
+              console.log('💬 Display text (backend):', this.displayText);
+            }
+
             return true;
+          } else {
+            console.error('❌ Erro ao gerar código:', result);
+            return false;
           }
-          return false;
         } catch (error) {
-          if (CLARA_CONFIG.debug) console.error('❌ Erro na geração de código:', error);
+          console.error('❌ Erro na geração de código:', error);
           return false;
         }
       },
@@ -265,8 +341,17 @@
         const ref = (document.referrer || '').toLowerCase();
         const src = (trackingParams.utm_source || '').toLowerCase();
 
-        const fromGoogle = !!trackingParams.gclid || src.includes('google') || ref.includes('google.');
-        const fromMeta = !!trackingParams.fbclid || src.includes('facebook') || src.includes('instagram') || ref.includes('facebook.') || ref.includes('instagram.');
+        const fromGoogle =
+          !!trackingParams.gclid ||
+          src.includes('google') ||
+          ref.includes('google.');
+
+        const fromMeta =
+          !!trackingParams.fbclid ||
+          src.includes('facebook') ||
+          src.includes('instagram') ||
+          ref.includes('facebook.') ||
+          ref.includes('instagram.');
 
         if (fromGoogle) return 'Google';
         if (fromMeta) return 'Instagram/Facebook';
@@ -277,17 +362,23 @@
         const source = this.inferSourceLabel(trackingParams);
 
         let raw = this.trackingCode ? String(this.trackingCode) : '';
+
+        // Remove colchetes
         raw = raw.replace(/[\[\]]/g, '');
+
+        // Remove a palavra "atendimento" (qualquer caixa)
         raw = raw.replace(/\batendimento\b/gi, '').trim();
+
+        // Pega só o primeiro bloco numérico (se existir)
         const num = (raw.match(/\d+/) || [raw])[0];
 
         const atendimento = num ? `[ATENDIMENTO ${num}]` : `[ATENDIMENTO]`;
         return `${atendimento} Vim do ${source}, gostaria do catálogo.`;
       },
 
-      // Disparo de saída (não redireciona; WhatsApp abre em nova aba)
+      // Disparo de saída: Google Ads + Meta Pixel (não redireciona; WA abre em nova aba)
       fireExitEvents: function(trackingParams) {
-        // Google Ads conversion
+        // Google conversion
         try {
           if (typeof gtag === 'function') {
             gtag('event', 'conversion', {
@@ -298,7 +389,7 @@
           }
         } catch (e) {}
 
-        // Meta Pixel event
+        // Meta event
         try {
           if (typeof fbq === 'function') {
             fbq('track', EXIT_CONFIG.metaEventName, {
@@ -327,24 +418,41 @@
             click_timestamp: new Date().toISOString()
           };
 
+          if (CLARA_CONFIG.debug) {
+            console.log('📤 Enviando clique para API:', payload);
+          }
+
           const response = await fetch(CLARA_CONFIG.apiUrl + '/register-click', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
             body: JSON.stringify(payload),
             keepalive: true
           });
 
-          // não quebra se não vier JSON
-          try { await response.json(); } catch (_) {}
-          return response.ok;
+          let result = null;
+          try { result = await response.json(); } catch (_) {}
+
+          if ((result && result.success) || response.ok) {
+            if (CLARA_CONFIG.debug) console.log('✅ Clique registrado:', result || { ok: true });
+            return true;
+          } else {
+            console.error('❌ Erro ao registrar clique:', result || { status: response.status });
+            return false;
+          }
         } catch (error) {
-          if (CLARA_CONFIG.debug) console.error('❌ Erro na requisição de clique:', error);
+          console.error('❌ Erro na requisição de clique:', error);
           return false;
         }
       },
 
       modifyWhatsAppLinks: function() {
-        if (!this.codeGenerated) return 0;
+        if (!this.codeGenerated) {
+          if (CLARA_CONFIG.debug) console.warn('⚠️ Código ainda não foi gerado, aguardando...');
+          return 0;
+        }
 
         const selectors = [
           'a[href*="wa.me"]',
@@ -353,17 +461,25 @@
         ];
 
         const whatsappLinks = document.querySelectorAll(selectors.join(', '));
+
+        if (CLARA_CONFIG.debug) {
+          console.log(`🔍 Encontrados ${whatsappLinks.length} links do WhatsApp`);
+        }
+
         const trackingParams = this.getTrackingParams();
         const fullMessage = this.buildWhatsAppMessage(trackingParams);
 
         whatsappLinks.forEach((link, index) => {
-          // evita duplicar listener/modificação
+          // Evita duplicar listeners/modificação quando MutationObserver disparar de novo
           if (link.dataset && link.dataset.claraTracked === '1') return;
           if (link.dataset) link.dataset.claraTracked = '1';
 
-          try {
-            const url = new URL(link.href);
+          const originalHref = link.href;
 
+          try {
+            const url = new URL(originalHref);
+
+            // Se já existir texto, preserva e adiciona o nosso embaixo
             const existingText = url.searchParams.get('text');
             if (existingText && existingText.trim()) {
               url.searchParams.set('text', existingText + '\n\n' + fullMessage);
@@ -373,15 +489,26 @@
 
             link.href = url.toString();
 
+            // Listener de clique
             link.addEventListener('click', async () => {
+              if (CLARA_CONFIG.debug) console.log('🖱️ Clique no link WhatsApp #' + index);
+
               // 1) Disparo de saída (Ads)
               this.fireExitEvents(trackingParams);
 
               // 2) Registro no seu backend
               await this.registerClick(trackingParams, this.trackingCode);
             });
+
+            if (CLARA_CONFIG.debug) {
+              console.log(`✅ Link #${index} modificado:`, {
+                original: originalHref,
+                novo: link.href,
+                mensagem: url.searchParams.get('text')
+              });
+            }
           } catch (error) {
-            if (CLARA_CONFIG.debug) console.error(`❌ Erro ao modificar link #${index}:`, error);
+            console.error(`❌ Erro ao modificar link #${index}:`, error);
           }
         });
 
@@ -402,27 +529,57 @@
                   'a[href*="api.whatsapp.com"]',
                   'a[href*="whatsapp.com"]'
                 ];
-                const newLinks = node.querySelectorAll ? node.querySelectorAll(selectors.join(', ')) : [];
-                if (newLinks.length > 0) hasNewLinks = true;
+
+                const newLinks = node.querySelectorAll ?
+                  node.querySelectorAll(selectors.join(', ')) : [];
+
+                if (newLinks.length > 0) {
+                  hasNewLinks = true;
+                }
               }
             });
           });
 
           if (hasNewLinks) {
+            if (CLARA_CONFIG.debug) console.log('🔄 Novos links detectados, agendando atualização...');
             clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(() => this.modifyWhatsAppLinks(), 200);
+            debounceTimer = setTimeout(() => {
+              this.modifyWhatsAppLinks();
+            }, 200);
           }
         });
 
-        observer.observe(document.body, { childList: true, subtree: true });
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+
+        if (CLARA_CONFIG.debug) console.log('👀 Observer ativo para novos links');
       },
 
       init: async function() {
-        const ok = await this.generateCode();
-        if (!ok) return;
+        if (CLARA_CONFIG.debug) {
+          console.log('🚀 Clara Tracking DINÂMICO iniciando...');
+          console.log('📋 Configuração:', {
+            configId: CLARA_CONFIG.configId,
+            empresa: CLARA_CONFIG.companyId,
+            url: window.location.href
+          });
+        }
 
-        this.modifyWhatsAppLinks();
+        const ok = await this.generateCode();
+        if (!ok) {
+          console.error('❌ Falha ao gerar código, tracking desativado');
+          return;
+        }
+
+        const linksModified = this.modifyWhatsAppLinks();
         this.observeNewLinks();
+
+        if (CLARA_CONFIG.debug) {
+          console.log(`✅ Clara Tracking ativado! ${linksModified} links modificados.`);
+          console.log(`🎯 Código único gerado: ${this.trackingCode}`);
+        }
       }
     };
 
@@ -444,10 +601,17 @@
       <p class="sub">Entrega rápida, pagamento na entrega e suporte direto pelo WhatsApp.</p>
 
       <div class="cta-group">
-        <a class="cta" href="https://wa.me/5534984431567?text=" target="_blank" rel="noopener noreferrer">
+        <a
+          class="cta"
+          href="https://wa.me/5534984431567?text="
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <span class="cta-icon" aria-hidden="true">
             <svg viewBox="0 0 32 32" role="img" focusable="false">
-              <path d="M26.6 5.4A13.46 13.46 0 0 0 16 1.34 13.58 13.58 0 0 0 2.44 15a13.33 13.33 0 0 0 1.73 6.62L2 30.66l9.26-2.41A13.59 13.59 0 0 0 16 29.2 13.58 13.58 0 0 0 26.6 5.4Zm-10.6 20.3a11.2 11.2 0 0 1-5.71-1.57l-.41-.24-5.5 1.44 1.47-5.37-.26-.44a11.18 11.18 0 0 1 9.84-16.8h.06A11.21 11.21 0 0 1 26.2 16 11.22 11.22 0 0 1 16 25.7Zm6.19-8.38c-.34-.17-2-1-2.3-1.11s-.54-.17-.77.17-.88 1.11-1.09 1.35-.4.26-.74.09a9.25 9.25 0 0 1-2.74-1.7 10.3 10.3 0 0 1-1.91-2.39c-.2-.34 0-.53.15-.7s.34-.4.51-.6a2.29 2.29 0 0 0 .34-.57.62.62 0 0 0-.03-.6c-.09-.17-.77-1.86-1.06-2.56-.28-.68-.58-.59-.77-.6h-.66a1.26 1.26 0 0 0-.91.43 3.82 3.82 0 0 0-1.2 2.83 6.66 6.66 0 0 0 1.39 3.55 15.23 15.23 0 0 0 5.84 5 19.92 19.92 0 0 0 1.96.72 4.73 4.73 0 0 0 2.18.14 3.56 3.56 0 0 0 2.33-1.63 2.88 2.88 0 0 0 .2-1.62c-.09-.14-.32-.22-.66-.38Z"></path>
+              <path
+                d="M26.6 5.4A13.46 13.46 0 0 0 16 1.34 13.58 13.58 0 0 0 2.44 15a13.33 13.33 0 0 0 1.73 6.62L2 30.66l9.26-2.41A13.59 13.59 0 0 0 16 29.2 13.58 13.58 0 0 0 26.6 5.4Zm-10.6 20.3a11.2 11.2 0 0 1-5.71-1.57l-.41-.24-5.5 1.44 1.47-5.37-.26-.44a11.18 11.18 0 0 1 9.84-16.8h.06A11.21 11.21 0 0 1 26.2 16 11.22 11.22 0 0 1 16 25.7Zm6.19-8.38c-.34-.17-2-1-2.3-1.11s-.54-.17-.77.17-.88 1.11-1.09 1.35-.4.26-.74.09a9.25 9.25 0 0 1-2.74-1.7 10.3 10.3 0 0 1-1.91-2.39c-.2-.34 0-.53.15-.7s.34-.4.51-.6a2.29 2.29 0 0 0 .34-.57.62.62 0 0 0-.03-.6c-.09-.17-.77-1.86-1.06-2.56-.28-.68-.58-.59-.77-.6h-.66a1.26 1.26 0 0 0-.91.43 3.82 3.82 0 0 0-1.2 2.83 6.66 6.66 0 0 0 1.39 3.55 15.23 15.23 0 0 0 5.84 5 19.92 19.92 0 0 0 1.96.72 4.73 4.73 0 0 0 2.18.14 3.56 3.56 0 0 0 2.33-1.63 2.88 2.88 0 0 0 .2-1.62c-.09-.14-.32-.22-.66-.38Z"
+              ></path>
             </svg>
           </span>
           <span class="cta-text">
@@ -460,8 +624,117 @@
       <p class="note">Atendimento oficial em Uberlândia. Consulte estoque atualizado pelo WhatsApp.</p>
     </header>
 
-    <!-- (restante do seu HTML permanece exatamente igual) -->
+    <section class="card stack">
+      <h2>Modelos favoritos com uso prático</h2>
+      <p>Descartáveis gelados prontos para uso, discretos e práticos para o dia a dia.</p>
+      <ul class="pill-list">
+        <li>Pagamento na entrega</li>
+        <li>Entrega rápida em Uberlândia</li>
+        <li>Canal oficial pelo WhatsApp</li>
+        <li>Embalagem discreta</li>
+      </ul>
+      <p class="note">Consulte estoque atualizado no WhatsApp.</p>
+    </section>
 
+    <section class="grid-2">
+      <div class="card stack">
+        <div class="section-title"><span>★</span>Por que escolher nossos descartáveis gelados?</div>
+        <ul class="list">
+          <li>Pronto para uso: chegue, abra e desfrute sem configurações.</li>
+          <li>Qualidade consistente lote a lote, zero surpresas.</li>
+          <li>Formato compacto e discreto para levar em qualquer lugar.</li>
+          <li>Suporte direto pelo WhatsApp para dúvidas ou trocas.</li>
+        </ul>
+      </div>
+      <div class="card stack">
+        <div class="section-title"><span>✔</span>Compra com segurança</div>
+        <ul class="list">
+          <li>Pagamento na entrega em Uberlândia: receba, confira e só então pague.</li>
+          <li>Produto lacrado e embalado de forma discreta para sua segurança.</li>
+          <li>Prova de autenticidade: enviamos fotos e vídeo do lote antes da entrega.</li>
+          <li>Canal oficial: único WhatsApp de atendimento (número abaixo) para evitar golpes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card stack">
+      <div class="section-title"><span>🧭</span>Como funciona</div>
+      <ul class="list">
+        <li>Escolha o modelo e quantidade pelo WhatsApp.</li>
+        <li>Confirmamos estoque e horário de entrega na região de Uberlândia.</li>
+        <li>Você recebe, confere e paga na entrega. Simples e seguro.</li>
+      </ul>
+
+      <div class="cta-group">
+        <a
+          class="cta"
+          href="https://wa.me/5534984431567?text="
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" role="img" focusable="false">
+              <path
+                d="M26.6 5.4A13.46 13.46 0 0 0 16 1.34 13.58 13.58 0 0 0 2.44 15a13.33 13.33 0 0 0 1.73 6.62L2 30.66l9.26-2.41A13.59 13.59 0 0 0 16 29.2 13.58 13.58 0 0 0 26.6 5.4Zm-10.6 20.3a11.2 11.2 0 0 1-5.71-1.57l-.41-.24-5.5 1.44 1.47-5.37-.26-.44a11.18 11.18 0 0 1 9.84-16.8h.06A11.21 11.21 0 0 1 26.2 16 11.22 11.22 0 0 1 16 25.7Zm6.19-8.38c-.34-.17-2-1-2.3-1.11s-.54-.17-.77.17-.88 1.11-1.09 1.35-.4.26-.74.09a9.25 9.25 0 0 1-2.74-1.7 10.3 10.3 0 0 1-1.91-2.39c-.2-.34 0-.53.15-.7s.34-.4.51-.6a2.29 2.29 0 0 0 .34-.57.62.62 0 0 0-.03-.6c-.09-.17-.77-1.86-1.06-2.56-.28-.68-.58-.59-.77-.6h-.66a1.26 1.26 0 0 0-.91.43 3.82 3.82 0 0 0-1.2 2.83 6.66 6.66 0 0 0 1.39 3.55 15.23 15.23 0 0 0 5.84 5 19.92 19.92 0 0 0 1.96.72 4.73 4.73 0 0 0 2.18.14 3.56 3.56 0 0 0 2.33-1.63 2.88 2.88 0 0 0 .2-1.62c-.09-.14-.32-.22-.66-.38Z"
+              ></path>
+            </svg>
+          </span>
+          <span class="cta-text">
+            Chamar no WhatsApp<br />
+            <small>Resposta rápida pelo WhatsApp</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="trust-badges">
+      <div class="badge">Pagamento na entrega em Uberlândia</div>
+      <div class="badge">Atendimento oficial: +55 34 98443-1567</div>
+      <div class="badge">Fotos e vídeo do lote antes da entrega</div>
+    </section>
+
+    <section class="card stack">
+      <div class="section-title"><span>❓</span>Perguntas frequentes</div>
+      <div class="stack">
+        <div>
+          <h3 style="margin: 0 0 6px; font-size: 1.05rem; color: #fdf6e3;">Como faço o pedido?</h3>
+          <p>Toque no botão de WhatsApp, diga o modelo e quantidade. Confirmamos horário e endereço de entrega.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 6px; font-size: 1.05rem; color: #fdf6e3;">Tem frete?</h3>
+          <p>Entregamos em Uberlândia com frete grátis.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 6px; font-size: 1.05rem; color: #fdf6e3;">Posso pagar com cartão?</h3>
+          <p>Sim. Aceitamos cartão, PIX ou dinheiro, e você só paga após receber e conferir.</p>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 6px; font-size: 1.05rem; color: #fdf6e3;">É seguro?</h3>
+          <p>Usamos embalagem discreta, enviamos prova de autenticidade antes e mantemos um único número oficial para evitar golpes.</p>
+        </div>
+      </div>
+
+      <div class="cta-group">
+        <a
+          class="cta"
+          href="https://wa.me/5534984431567?text="
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" role="img" focusable="false">
+              <path
+                d="M26.6 5.4A13.46 13.46 0 0 0 16 1.34 13.58 13.58 0 0 0 2.44 15a13.33 13.33 0 0 0 1.73 6.62L2 30.66l9.26-2.41A13.59 13.59 0 0 0 16 29.2 13.58 13.58 0 0 0 26.6 5.4Zm-10.6 20.3a11.2 11.2 0 0 1-5.71-1.57l-.41-.24-5.5 1.44 1.47-5.37-.26-.44a11.18 11.18 0 0 1 9.84-16.8h.06A11.21 11.21 0 0 1 26.2 16 11.22 11.22 0 0 1 16 25.7Zm6.19-8.38c-.34-.17-2-1-2.3-1.11s-.54-.17-.77.17-.88 1.11-1.09 1.35-.4.26-.74.09a9.25 9.25 0 0 1-2.74-1.7 10.3 10.3 0 0 1-1.91-2.39c-.2-.34 0-.53.15-.7s.34-.4.51-.6a2.29 2.29 0 0 0 .34-.57.62 0 0 0-.03-.6c-.09-.17-.77-1.86-1.06-2.56-.28-.68-.58-.59-.77-.6h-.66a1.26 1.26 0 0 0-.91.43 3.82 3.82 0 0 0-1.2 2.83 6.66 6.66 0 0 0 1.39 3.55 15.23 15.23 0 0 0 5.84 5 19.92 19.92 0 0 0 1.96.72 4.73 4.73 0 0 0 2.18.14 3.56 3.56 0 0 0 2.33-1.63 2.88 2.88 0 0 0 .2-1.62c-.09-.14-.32-.22-.66-.38Z"
+              ></path>
+            </svg>
+          </span>
+          <span class="cta-text">
+            Tirar dúvidas agora<br />
+            <small>WhatsApp Uberlândia</small>
+          </span>
+        </a>
+      </div>
+    </section>
   </main>
 
   <!-- (NÃO ALTERADO) Botão flutuante -->
