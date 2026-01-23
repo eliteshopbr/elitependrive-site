@@ -313,13 +313,23 @@
       return 'site';
     },
 
-    // Montar mensagem forte para o WhatsApp (sem depender do backend)
-    buildWhatsAppMessage: function(trackingParams) {
-      const source = this.inferSourceLabel(trackingParams);
-      const code = this.trackingCode ? String(this.trackingCode) : '';
-      const atendimento = code ? `[ATENDIMENTO ${code}]` : `[ATENDIMENTO]`;
-      return `${atendimento} Vim do ${source}, gostaria do catálogo.`;
-    },
+buildWhatsAppMessage: function(trackingParams) {
+  const source = this.inferSourceLabel(trackingParams);
+
+  let raw = this.trackingCode ? String(this.trackingCode) : '';
+
+  // Remove colchetes
+  raw = raw.replace(/[\[\]]/g, '');
+
+  // Remove a palavra "atendimento" (qualquer caixa)
+  raw = raw.replace(/\batendimento\b/gi, '').trim();
+
+  // Pega só o primeiro bloco numérico (se existir)
+  const num = (raw.match(/\d+/) || [raw])[0];
+
+  const atendimento = num ? `[ATENDIMENTO ${num}]` : `[ATENDIMENTO]`;
+  return `${atendimento} Vim do ${source}, gostaria do catálogo.`;
+},
 
     // Registrar clique no backend
     registerClick: async function(trackingParams, trackingCode) {
@@ -674,6 +684,7 @@
 
 </body>
 </html>
+
 
 
 
