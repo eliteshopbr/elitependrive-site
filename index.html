@@ -221,51 +221,51 @@
   </style>
 </head>
 <body>
-<!-- Clara Tracking Script DINÂMICO - Kihon Hair -->
-<!-- Este script gera um código ÚNICO para cada visitante -->
-<!-- Config ID: 987d9192-b9fc-4a9f-bccb-7de95ab0d677 -->
+<!-- Clara Tracking Script DINÂMICO - Elite (WhatsApp + UTMs + Código Único) -->
+<!-- Usa endpoints do script original (FUNCIONAL) -->
+<!-- Config ID: f1583f3c-b191-4107-9fb7-822614c707bb -->
 <script>
 (function() {
   'use strict';
-    
+
   const CLARA_CONFIG = {
-    configId: '9600f76f-1fb0-4ef9-a936-6780fe7d1932',  // ID da configuração (padrão)
+    configId: 'f1583f3c-b191-4107-9fb7-822614c707bb',
     companyId: 'fce5fec7-8fc3-4335-b7ae-536bc48b194b',
-    apiUrl: 'https://api.reativazap.com/tracking',  // ⚠️ TROCAR pela URL do seu backend em produção!
-    debug: true  // Ativado para debug - mude para false em produção
+    apiUrl: 'https://api.reativazap.com/tracking', // Endpoints do script original: /generate-code e /register-click
+    debug: false
   };
-    
+
   const CLARA_TRACKING = {
-    trackingCode: null,      // Será preenchido dinamicamente
-    displayText: null,       // Será preenchido dinamicamente
+    trackingCode: null,
+    displayText: null,
     codeGenerated: false,
-        
-    // 🎯 GERAR CÓDIGO ÚNICO para este visitante
+
+    // 🎯 Gerar código único para este visitante
     generateCode: async function() {
       try {
         if (CLARA_CONFIG.debug) {
           console.log('🎲 Gerando código único...');
           console.log('📋 Config ID:', CLARA_CONFIG.configId);
         }
-                
+
         const response = await fetch(CLARA_CONFIG.apiUrl + '/generate-code/' + CLARA_CONFIG.configId);
-                
+
         if (!response.ok) {
           throw new Error('Erro ao gerar código: ' + response.status);
         }
-                
+
         const result = await response.json();
-                
-        if (result.success) {
+
+        if (result && result.success) {
           this.trackingCode = result.tracking_code;
           this.displayText = result.display_text;
           this.codeGenerated = true;
-                    
+
           if (CLARA_CONFIG.debug) {
             console.log('✅ Código gerado:', this.trackingCode);
-            console.log('💬 Mensagem completa:', this.displayText);
+            console.log('💬 Display text (backend):', this.displayText);
           }
-                    
+
           return true;
         } else {
           console.error('❌ Erro ao gerar código:', result);
@@ -276,7 +276,7 @@
         return false;
       }
     },
-        
+
     // Detectar UTMs e parâmetros da URL
     getTrackingParams: function() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -290,7 +290,37 @@
         fbclid: urlParams.get('fbclid')
       };
     },
-        
+
+    // Inferir origem para a mensagem (Google / Instagram/Facebook / site)
+    inferSourceLabel: function(trackingParams) {
+      const ref = (document.referrer || '').toLowerCase();
+      const src = (trackingParams.utm_source || '').toLowerCase();
+
+      const fromGoogle =
+        !!trackingParams.gclid ||
+        src.includes('google') ||
+        ref.includes('google.');
+
+      const fromMeta =
+        !!trackingParams.fbclid ||
+        src.includes('facebook') ||
+        src.includes('instagram') ||
+        ref.includes('facebook.') ||
+        ref.includes('instagram.');
+
+      if (fromGoogle) return 'Google';
+      if (fromMeta) return 'Instagram/Facebook';
+      return 'site';
+    },
+
+    // Montar mensagem forte para o WhatsApp (sem depender do backend)
+    buildWhatsAppMessage: function(trackingParams) {
+      const source = this.inferSourceLabel(trackingParams);
+      const code = this.trackingCode ? String(this.trackingCode) : '';
+      const atendimento = code ? `[ATENDIMENTO ${code}]` : `[ATENDIMENTO]`;
+      return `${atendimento} Vim do ${source}, gostaria do catálogo.`;
+    },
+
     // Registrar clique no backend
     registerClick: async function(trackingParams, trackingCode) {
       try {
@@ -309,27 +339,30 @@
           referrer_url: document.referrer,
           click_timestamp: new Date().toISOString()
         };
-                
+
         if (CLARA_CONFIG.debug) {
           console.log('📤 Enviando clique para API:', payload);
         }
-                
+
         const response = await fetch(CLARA_CONFIG.apiUrl + '/register-click', {
           method: 'POST',
-          headers: { 
+          headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          keepalive: true // ajuda a não perder o evento quando a página navega pro WhatsApp
         });
-                
-        const result = await response.json();
-                
-        if (result.success || response.ok) {
-          if (CLARA_CONFIG.debug) console.log('✅ Clique registrado:', result);
+
+        // Tenta ler JSON, mas não quebra se não vier JSON
+        let result = null;
+        try { result = await response.json(); } catch (_) {}
+
+        if ((result && result.success) || response.ok) {
+          if (CLARA_CONFIG.debug) console.log('✅ Clique registrado:', result || { ok: true });
           return true;
         } else {
-          console.error('❌ Erro ao registrar clique:', result);
+          console.error('❌ Erro ao registrar clique:', result || { status: response.status });
           return false;
         }
       } catch (error) {
@@ -337,70 +370,77 @@
         return false;
       }
     },
-        
+
     // Modificar TODOS os links WhatsApp da página
     modifyWhatsAppLinks: function() {
       if (!this.codeGenerated) {
-        console.warn('⚠️ Código ainda não foi gerado, aguardando...');
+        if (CLARA_CONFIG.debug) console.warn('⚠️ Código ainda não foi gerado, aguardando...');
         return 0;
       }
-            
-      // Usar mensagem completa gerada dinamicamente
-      const fullMessage = this.displayText || this.trackingCode;
-            
-      // Selecionar todos os links do WhatsApp
+
       const selectors = [
         'a[href*="wa.me"]',
         'a[href*="api.whatsapp.com"]',
         'a[href*="whatsapp.com"]'
       ];
-            
+
       const whatsappLinks = document.querySelectorAll(selectors.join(', '));
-            
+
       if (CLARA_CONFIG.debug) {
         console.log(`🔍 Encontrados ${whatsappLinks.length} links do WhatsApp`);
       }
-            
+
       const trackingParams = this.getTrackingParams();
-            
+      const fullMessage = this.buildWhatsAppMessage(trackingParams);
+
       whatsappLinks.forEach((link, index) => {
+        // Evita duplicar listeners/modificação quando MutationObserver disparar de novo
+        if (link.dataset && link.dataset.claraTracked === '1') return;
+        if (link.dataset) link.dataset.claraTracked = '1';
+
         const originalHref = link.href;
-                
+
         try {
           const url = new URL(originalHref);
-                    
-          // Usar mensagem completa (código gerado + frase)
-          url.searchParams.set('text', fullMessage);
+
+          // Se já existir texto, preserva e adiciona o nosso embaixo
+          const existingText = url.searchParams.get('text');
+          if (existingText && existingText.trim()) {
+            url.searchParams.set('text', existingText + '\n\n' + fullMessage);
+          } else {
+            url.searchParams.set('text', fullMessage);
+          }
+
           link.href = url.toString();
-                    
-          // Adicionar evento de clique
-          link.addEventListener('click', async (e) => {
+
+          // Listener de clique
+          link.addEventListener('click', async () => {
             if (CLARA_CONFIG.debug) console.log('🖱️ Clique no link WhatsApp #' + index);
-                        
-            // Registrar clique no backend
             await this.registerClick(trackingParams, this.trackingCode);
           });
-                    
+
           if (CLARA_CONFIG.debug) {
             console.log(`✅ Link #${index} modificado:`, {
               original: originalHref,
               novo: link.href,
-              mensagemCompleta: fullMessage
+              mensagem: url.searchParams.get('text')
             });
           }
         } catch (error) {
           console.error(`❌ Erro ao modificar link #${index}:`, error);
         }
       });
-            
+
       return whatsappLinks.length;
     },
-        
-    // Observar novos links adicionados dinamicamente
+
+    // Observar novos links adicionados dinamicamente (com debounce)
     observeNewLinks: function() {
+      let debounceTimer = null;
+
       const observer = new MutationObserver((mutations) => {
         let hasNewLinks = false;
-                
+
         mutations.forEach((mutation) => {
           mutation.addedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
@@ -409,32 +449,34 @@
                 'a[href*="api.whatsapp.com"]',
                 'a[href*="whatsapp.com"]'
               ];
-                            
-              const newLinks = node.querySelectorAll ? 
+
+              const newLinks = node.querySelectorAll ?
                 node.querySelectorAll(selectors.join(', ')) : [];
-                            
-              if (newLinks.length > 0) {
-                hasNewLinks = true;
-              }
+
+              if (newLinks.length > 0) hasNewLinks = true;
             }
           });
         });
-                
+
         if (hasNewLinks) {
-          if (CLARA_CONFIG.debug) console.log('🔄 Novos links detectados, atualizando...');
-          this.modifyWhatsAppLinks();
+          if (CLARA_CONFIG.debug) console.log('🔄 Novos links detectados, agendando atualização...');
+
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            this.modifyWhatsAppLinks();
+          }, 200);
         }
       });
-            
+
       observer.observe(document.body, {
         childList: true,
         subtree: true
       });
-            
+
       if (CLARA_CONFIG.debug) console.log('👀 Observer ativo para novos links');
     },
-        
-    // Inicializar tracking
+
+    // Inicializar
     init: async function() {
       if (CLARA_CONFIG.debug) {
         console.log('🚀 Clara Tracking DINÂMICO iniciando...');
@@ -444,39 +486,35 @@
           url: window.location.href
         });
       }
-            
-      // 1. Gerar código único para este visitante
-      const codeGenerated = await this.generateCode();
-            
-      if (!codeGenerated) {
+
+      const ok = await this.generateCode();
+      if (!ok) {
         console.error('❌ Falha ao gerar código, tracking desativado');
         return;
       }
-            
-      // 2. Modificar links existentes
+
       const linksModified = this.modifyWhatsAppLinks();
-            
-      // 3. Observar novos links
       this.observeNewLinks();
-            
+
       if (CLARA_CONFIG.debug) {
         console.log(`✅ Clara Tracking ativado! ${linksModified} links modificados.`);
         console.log(`🎯 Código único gerado: ${this.trackingCode}`);
       }
     }
   };
-    
+
   // Inicializar quando DOM estiver pronto
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => CLARA_TRACKING.init());
   } else {
     CLARA_TRACKING.init();
   }
-    
+
   // Expor para debug (opcional)
   window.CLARA_TRACKING = CLARA_TRACKING;
 })();
 </script>
+  
   <!-- Removidos scripts que propagavam parâmetros e carregavam pixel TIMTIM -->
 
   <main class="page">
@@ -636,5 +674,6 @@
 
 </body>
 </html>
+
 
 
